@@ -104,11 +104,6 @@ class Window(Frame):
         Window.startButton = Button(self, text="START",font = "Helvetica 16 ", bg = "white", command=clickStartButton, width = 25, height = 3)
         Window.startButton.place(x =(WIDTH/3.25) , y = (HEIGHT/2))
         
-   
-
-
-    def clickBack(self):
-        root.attributes('-fullscreen',False)
 
 
 
@@ -195,8 +190,8 @@ class Window(Frame):
         self.c.itemconfig(alist[Window.x], fill= "white")
         if (Window.x == 7):
             self.c.itemconfig(alist[7], fill= "white")
-            jump = jump(self.correction_factor)
-            if( jump == "yay"):
+            self.jump = jump(self.correction_factor)
+            if( self.jump == "yay"):
                 Window.x = -1
                 Window.score += 1
                 self.c.itemconfig(Window.scorepic,text = Window.score)
@@ -235,9 +230,6 @@ class Window(Frame):
 
 # Clears the Start Screen and Goes to Color Picker screen
 def clickStartButton():
-    print("Initializing...")
-    correction_factor = calibrate()
-    print("Done with calibration")
     Window.startButton.destroy()
     Window.text.pack_forget()
     Window.intro.pack_forget()
@@ -283,7 +275,7 @@ def clearEnd():
 
 def clickRestart():
     print("restart Clicked")
-    Window.clearEnd()
+    clearEnd()
     app.createRope()
     app.turnRope()
     
@@ -344,6 +336,5 @@ root = Tk()
 app = Window(root)
 app.Home()
 root.wm_title("Jump In")
-#root.attributes('-fullscreen',True)
 root.geometry("{0}x{1}".format(WIDTH, HEIGHT))
 root.mainloop()
